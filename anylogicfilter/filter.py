@@ -42,6 +42,4 @@ class AnyLogicFilter(admin.FieldListFilter):
         else:
             return queryset
         """
-        raise NotImplementedError(
-            'Told ya!'
-        )
+        raise NotImplementedError('Told ya!')
