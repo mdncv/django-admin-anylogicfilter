@@ -19,6 +19,10 @@ INSTALLED_APPS = [
 ```
 2. Declare your filter class by inheriting from ```AnyLogicFilter``` class:
 ```Python
+from django import forms
+from anylogicfilter.filter import AnyLogicFilter
+
+
 class MyFilter(AnyLogicFilter):
     form_fields = [
         ('field_name', forms.CharField(max_length=100, required=True, initial='')),
