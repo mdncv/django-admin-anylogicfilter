@@ -4,8 +4,10 @@ from django import forms
 
 class AnyLogicFilter(admin.FieldListFilter):
     template = 'anylogicfilter/filter.html'
-    form_fields = []    # list formed with field_name-field tuples
-    # [(field_name, forms.AnyTypeOfField(**some_form_params)), ...]
+
+    # Populate form_fields list in the inherited class with field_name-field tuples.
+    # (Like this: [(field_name, forms.AnyTypeOfField(**some_form_params)), ...])
+    form_fields = []
 
     def __init__(self, field, request, params, model, model_admin, field_path):
         super().__init__(field, request, params, model, model_admin, field_path)
