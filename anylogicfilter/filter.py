@@ -6,7 +6,7 @@ class AnyLogicFilter(admin.FieldListFilter):
     template = 'anylogicfilter/filter.html'
 
     # Populate form_fields list in the inherited class with field_name-field tuples.
-    # (Like this: [(field_name, forms.AnyTypeOfField(**some_form_params)), ...])
+    # (Like this: [(field_name, forms.AnyTypeOfField(**some_form_field_params)), ...])
     form_fields = []
 
     def __init__(self, field, request, params, model, model_admin, field_path):
