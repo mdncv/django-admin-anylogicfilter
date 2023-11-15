@@ -4,24 +4,18 @@ from django import forms
 
 class AnyLogicFilter(admin.FieldListFilter):
     template = 'anylogicfilter/filter.html'
-    field_names = []
+    form_fields = []    # list formed with field_name-field tuples
+    # [(field_name, forms.AnyTypeOfField(**some_form_params)), ...]
 
     def __init__(self, field, request, params, model, model_admin, field_path):
         super().__init__(field, request, params, model, model_admin, field_path)
         self.form = self.prepare_form(request)
 
     def expected_parameters(self):
-        return self.field_names
-
-    def _prepare_form_fields(self):
-        return (
-            (name, forms.CharField(max_length=100, required=False, initial=''))
-            for name in self.field_names
-        )
+        return [field[0] for field in self.form_fields]
 
     def _prepare_form_class(self):
-        fields = self._prepare_form_fields()
-        form_class = type(str('AnyLogicFilter'), (forms.Form,), dict(fields))
+        form_class = type(str('AnyLogicFilter'), (forms.Form,), dict(self.form_fields))
         return form_class
 
     def prepare_form(self, _request):
@@ -34,7 +28,8 @@ class AnyLogicFilter(admin.FieldListFilter):
 
     def queryset(self, request, queryset):
         """
-        Make your own queryset function or fear the consequences!
+        Implement your own queryset function or suffer the consequences!
+        (Don't forget to set form_fields)!
         This might help you:
 
         if self.form.is_valid():
