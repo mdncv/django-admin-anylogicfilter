@@ -7,7 +7,6 @@ class AnyLogicFilter(admin.FieldListFilter):
     field_names = []
 
     def __init__(self, field, request, params, model, model_admin, field_path):
-        self.lookup_kwargs = field_path
         super().__init__(field, request, params, model, model_admin, field_path)
         self.form = self.prepare_form(request)
 
