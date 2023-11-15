@@ -15,12 +15,10 @@ class AnyLogicFilter(admin.FieldListFilter):
         return [field[0] for field in self.form_fields]
 
     def _prepare_form_class(self):
-        form_class = type(str('AnyLogicFilter'), (forms.Form,), dict(self.form_fields))
-        return form_class
+        return type(str('AnyLogicFilter'), (forms.Form,), dict(self.form_fields))
 
     def prepare_form(self, _):
-        form_class = self._prepare_form_class()
-        return form_class(self.used_parameters or None)
+        return self._prepare_form_class()(self.used_parameters or None)
 
     def choices(self, _):
         # no predefined choices
