@@ -6,7 +6,7 @@ App tested with
 * Django 4
 ## Installation
 ```Bash
-pip install anylogicfilter
+pip install django-admin-anylogicfilter
 ```
 ## Quick start
 1. Add anylogicfilter to INSTALLED_APPS:
