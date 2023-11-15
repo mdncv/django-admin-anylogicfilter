@@ -18,12 +18,12 @@ class AnyLogicFilter(admin.FieldListFilter):
         form_class = type(str('AnyLogicFilter'), (forms.Form,), dict(self.form_fields))
         return form_class
 
-    def prepare_form(self, _request):
+    def prepare_form(self, _):
         form_class = self._prepare_form_class()
         return form_class(self.used_parameters or None)
 
-    # no predefined choices
-    def choices(self, cl):
+    def choices(self, _):
+        # no predefined choices
         return []
 
     def queryset(self, request, queryset):
