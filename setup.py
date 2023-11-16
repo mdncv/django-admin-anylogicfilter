@@ -31,7 +31,7 @@ setup(
     author_email='m.v.medencev@gmail.com',
     maintainer='Ivan Golyshev',
     maintainer_email='golyshev.nomer@gmail.com',
-    description='Django app that adds a filter with any functionality you need.',
+    description='Django app that adds admin filter with any functionality you need.',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     url='https://github.com/mdncv/django-admin-anylogicfilter',

@@ -1,5 +1,5 @@
 # django-admin-anylogicfilter
-Django app that adds a filter with any functionality you need.
+Django app that adds admin filter with any functionality you need.
 ## Requirements
 App tested with
 * Python 3.11
