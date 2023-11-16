@@ -6,12 +6,16 @@ class AnyLogicFilter(admin.FieldListFilter):
     template = 'anylogicfilter/filter.html'
 
     # Populate form_fields list in the inherited class with field_name-field tuples.
+    # Change filter title in the inherited class as you want
+    filter_title = ''
+
     # (Like this: [(field_name, forms.AnyTypeOfField(**some_form_field_params)), ...])
     form_fields = []
 
     def __init__(self, field, request, params, model, model_admin, field_path):
         super().__init__(field, request, params, model, model_admin, field_path)
         self.form = self.prepare_form(request)
+        self.title = self.filter_title if self.filter_title else f'By {self.title}'
 
     def expected_parameters(self):
         return [field[0] for field in self.form_fields]
