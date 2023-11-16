@@ -22,9 +22,11 @@ class AnyLogicFilter(admin.FieldListFilter):
     def prepare_form(self, _):
         return self._prepare_form_class()(self.used_parameters or None)
 
-    def choices(self, _):
-        # no predefined choices
-        return []
+    def choices(self, changelist):
+        filter_parameters = self.expected_parameters()
+        for key, value in changelist.get_filters_params().items():
+            if key not in filter_parameters:
+                yield {'key': key, 'value': value}
 
     def queryset(self, request, queryset):
         """
