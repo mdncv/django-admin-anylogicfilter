@@ -24,9 +24,9 @@ from anylogicfilter.filter import AnyLogicFilter
 
 
 class MyFilter(AnyLogicFilter):
-    form_fields = [
     filter_title = 'Abracadabra'
     
+    filter_fields = [
         ('field_name', forms.CharField(max_length=100, required=True, initial='')),
         ('other_field_name', forms.BooleanField(label='Not default by-name label', required=False, initial='')),
     ]

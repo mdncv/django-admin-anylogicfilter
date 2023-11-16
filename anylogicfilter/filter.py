@@ -5,12 +5,12 @@ from django import forms
 class AnyLogicFilter(admin.FieldListFilter):
     template = 'anylogicfilter/filter.html'
 
-    # Populate form_fields list in the inherited class with field_name-field tuples.
     # Change filter title in the inherited class as you want
     filter_title = ''
 
+    # Populate filter_fields list in the inherited class with field_name-field tuples.
     # (Like this: [(field_name, forms.AnyTypeOfField(**some_form_field_params)), ...])
-    form_fields = []
+    filter_fields = []
 
     def __init__(self, field, request, params, model, model_admin, field_path):
         super().__init__(field, request, params, model, model_admin, field_path)
@@ -18,10 +18,10 @@ class AnyLogicFilter(admin.FieldListFilter):
         self.title = self.filter_title if self.filter_title else f'By {self.title}'
 
     def expected_parameters(self):
-        return [field[0] for field in self.form_fields]
+        return [field[0] for field in self.filter_fields]
 
     def _prepare_form_class(self):
-        return type(str('AnyLogicFilter'), (forms.Form,), dict(self.form_fields))
+        return type(str('AnyLogicFilter'), (forms.Form,), dict(self.filter_fields))
 
     def prepare_form(self, _):
         return self._prepare_form_class()(self.used_parameters or None)
