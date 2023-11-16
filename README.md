@@ -52,6 +52,9 @@ class YourModelAdmin(admin.ModelAdmin):
     ]
 ```
 4. Enjoy!
+## Maintainers
+* [Maxim Medentsev](https://github.com/mdncv)
+* [Ivan Golyshev](https://github.com/Nomer77)
 ## Contributing
 Bug reports and/or pull requests are welcome :)
 ## License
