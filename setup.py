@@ -25,7 +25,7 @@ def get_package_data(package):
 
 setup(
     name='django-admin-anylogicfilter',
-    version='0.1.2',
+    version='0.1.3',
     install_requires=[],
     author='Maxim Medentsev',
     author_email='m.v.medencev@gmail.com',
