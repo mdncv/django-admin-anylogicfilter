@@ -34,7 +34,7 @@ class AnyLogicFilter(admin.FieldListFilter):
 
     def queryset(self, request, queryset):
         """
-        Implement your own queryset function or suffer the consequences!
+        Implement your own "queryset" method or suffer the consequences!
         (Don't forget to set form_fields)!
         This might help you:
 
