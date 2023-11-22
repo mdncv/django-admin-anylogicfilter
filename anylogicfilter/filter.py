@@ -48,4 +48,4 @@ class AnyLogicFilter(admin.FieldListFilter):
         else:
             return queryset
         """
-        raise NotImplementedError('"queryset" method not implemented. Told ya!')
+        raise NotImplementedError('The "queryset" method is not implemented. Told ya!')
