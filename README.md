@@ -32,16 +32,11 @@ class MyFilter(AnyLogicFilter):
     ]
 
     def queryset(self, request, queryset):
-        if self.form.is_valid():
-            filter_params = {
-                p: self.form.cleaned_data.get(p)
-                for p in self.expected_parameters()
-                if self.form.cleaned_data.get(p) is not None
-            }
-            # some query, using subquery with 2+ parameters or anything else you need
-            return queryset.filter(...filter_params['field_name']...filter_params['other_field_name']...)
-        else:
+        if not self.form.is_valid():
             return queryset
+        filter_params = self.filter_parameters()
+        # some query, using subquery with any parameters or anything else you need
+        return queryset.filter(...filter_params['field_name']...filter_params['other_field_name']...)
 ```
 3. Add it to ```admin.py```:
 ```Python
