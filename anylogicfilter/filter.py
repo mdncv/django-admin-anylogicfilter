@@ -1,5 +1,6 @@
-from django.contrib import admin
 from django import forms
+from django.contrib import admin
+from django.core.exceptions import ValidationError
 
 
 class AnyLogicFilter(admin.FieldListFilter):
@@ -20,6 +21,16 @@ class AnyLogicFilter(admin.FieldListFilter):
     def expected_parameters(self):
         return [field[0] for field in self.filter_fields]
 
+    def filter_parameters(self):
+        if not self.form.is_valid():
+            # Check form for being valid before call
+            raise ValidationError(self.form.errors)
+        return {
+            param: self.form.cleaned_data.get(param)
+            for param in self.expected_parameters()
+            if self.form.cleaned_data.get(param) is not None
+        }
+
     def _prepare_form_class(self):
         return type(str('AnyLogicFilter'), (forms.Form,), dict(self.filter_fields))
 
@@ -38,14 +49,9 @@ class AnyLogicFilter(admin.FieldListFilter):
         (Don't forget to set form_fields)!
         This might help you:
 
-        if self.form.is_valid():
-            filter_params = {
-                p: self.form.cleaned_data.get(p)
-                for p in self.expected_parameters()
-                if self.form.cleaned_data.get(p) is not None
-            }
-            return queryset.filter(**filter_params)
-        else:
+        if not self.form.is_valid():
             return queryset
+        filter_params = self.filter_parameters()
+        return queryset.filter(**filter_params)
         """
         raise NotImplementedError('The "queryset" method is not implemented. Told ya!')
