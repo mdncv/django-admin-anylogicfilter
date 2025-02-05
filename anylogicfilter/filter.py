@@ -49,14 +49,9 @@ class AnyLogicFilter(admin.FieldListFilter):
         (Don't forget to set form_fields)!
         This might help you:
 
-        if self.form.is_valid():
-            filter_params = {
-                p: self.form.cleaned_data.get(p)
-                for p in self.expected_parameters()
-                if self.form.cleaned_data.get(p) is not None
-            }
-            return queryset.filter(**filter_params)
-        else:
+        if not self.form.is_valid():
             return queryset
+        filter_params = self.filter_parameters()
+        return queryset.filter(**filter_params)
         """
         raise NotImplementedError('The "queryset" method is not implemented. Told ya!')
